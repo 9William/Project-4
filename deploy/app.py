@@ -57,9 +57,9 @@ if pilihan == 'Prediksi dari file csv':
         
         # Add a text input for searching merchant name
         id_search = st.text_input('Search ID')
-        id_search = int(id_search)
-        
+                
         if id_search:
+            id_search = int(id_search)  
             # Filter transactions for the given merchant name
             id_df = hasil_akhir[hasil_akhir['ID'] == id_search]
 
