@@ -54,6 +54,21 @@ if pilihan == 'Prediksi dari file csv':
         # Create a DataFrame with only ID and prediction results
         hasil_akhir = dataku[['ID']].copy()
         hasil_akhir['Hasil Predict'] = hasil
+        
+        # Add a text input for searching merchant name
+        id_search = st.text_input('Search ID')
+        id_search = int(id_search)
+        
+        if id_search:
+            # Filter transactions for the given merchant name
+            id_df = hasil_akhir[hasil_akhir['ID'] == id_search]
+
+            if not id_df.empty:
+                id_df['target Status'] = id_df['Hasil Predict'].apply(lambda x: 'Elligible' if x == 1 else 'Not Elligible')
+                st.write(f"Status untuk id '{id_search}':")
+                st.dataframe(id_df[['ID', 'Hasil Predict', 'target Status']], width=400, height=300)
+            else:
+                st.warning(f"Tidak ada id '{id_search}'")
 
         # Display the DataFrame with the predictions
         st.write("**Data Hasil Prediksi**")
