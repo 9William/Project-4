@@ -12,7 +12,7 @@ st.markdown("<h1 style='text-align: center; '> Credit Card Eligible </h1>", unsa
 st.markdown('---'*10)
 
 # Load model
-my_model = pickle.load(open('model_creditcard.pkl', 'rb'))
+my_model = pickle.load(open('model_creditcard.pkl', 'rb'), probability=True)
 
 
 # Opsi pilihan
