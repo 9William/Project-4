@@ -11,8 +11,14 @@ warnings.filterwarnings("ignore")
 st.markdown("<h1 style='text-align: center; '> Credit Card Eligible </h1>", unsafe_allow_html=True)
 st.markdown('---'*10)
 
-# Load model
-my_model = pickle.load(open('model_creditcard.pkl', 'rb'))
+# Load the model
+try:
+    with open('model_creditcard.pkl', 'rb') as file:
+        my_model = pickle.load(file)
+        if not hasattr(my_model, 'predict_proba'):
+            st.error("Model does not support probability predictions.")
+except Exception as e:
+    st.error(f"Error loading the model: {e}")
 
 
 # Opsi pilihan
